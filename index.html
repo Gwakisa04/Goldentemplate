@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GoldenCreation — Card Template Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#fdf8f2; --cream2:#fbf5ec; --beige:#efe5d6; --beige2:#e9dcc6;
+  --gold:#a68a64; --gold-dark:#8a6f4b; --gold-light:#c9b18c;
+  --ink:#4d4237; --ink-soft:#7a6c5d; --line:#e3d5c0;
+  --card:#fffdf9;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased}
+h1,h2,h3,.serif{font-family:'Cormorant Garamond',serif}
+.script{font-family:'Great Vibes',cursive;font-weight:400}
+img{display:block;max-width:100%}
+/* ===== TOP RIBBON + NAV ===== */
+.topbar{position:relative;background:linear-gradient(to bottom,rgba(253,248,242,.96),rgba(253,248,242,.82));z-index:50}
+.nav{max-width:1240px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:34px;padding:20px 20px 14px;position:relative}
+.nav a{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);text-decoration:none;font-weight:400}
+.nav a:hover{color:var(--gold-dark)}
+.logo{text-align:center;line-height:1}
+.logo .mono{font-family:'Cormorant Garamond',serif;font-size:30px;letter-spacing:.18em;font-weight:500}
+.logo .mono span{color:var(--gold)}
+.logo small{display:block;font-family:'Jost',sans-serif;font-size:8.5px;letter-spacing:.42em;text-transform:uppercase;color:var(--ink-soft);margin-top:5px}
+.logo .leaf{font-size:12px;color:var(--gold);letter-spacing:.3em}
+.ribbon{position:absolute;top:0;right:34px;background:linear-gradient(#b49a73,#a68a64);color:#fff;text-align:center;padding:14px 18px 22px;font-size:11px;letter-spacing:.22em;line-height:1.9;clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);box-shadow:0 8px 20px rgba(138,111,75,.35);z-index:60;min-width:104px}
+.ribbon b{display:block;font-weight:500}
+.ribbon .heart{font-size:18px;letter-spacing:0}
+.hamb{display:none;position:absolute;left:18px;top:22px;border:1px solid var(--line);background:#fff;border-radius:8px;padding:8px 10px;cursor:pointer}
+/* sticky filter bar attached to top */
+.filterbar{position:sticky;top:0;z-index:40;background:rgba(253,248,242,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.filterbar-inner{max-width:1240px;margin:0 auto;padding:10px 18px;display:flex;gap:10px;align-items:center;overflow-x:auto;scrollbar-width:none}
+.filterbar-inner::-webkit-scrollbar{display:none}
+.fbtn{white-space:nowrap;border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:9px 20px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif;transition:.25s}
+.fbtn small{opacity:.6;letter-spacing:.05em;margin-left:6px}
+.fbtn:hover{border-color:var(--gold);color:var(--gold-dark);transform:translateY(-1px)}
+.fbtn.active{background:var(--gold);border-color:var(--gold);color:#fff;box-shadow:0 8px 18px rgba(166,138,100,.35)}
+/* ===== HERO ===== */
+.hero{position:relative;overflow:hidden;background:#f7efe3;}
+.hero-bg{position:absolute;inset:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center top;opacity:.92}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(253,248,242,.72) 0%,rgba(253,248,242,.35) 30%,rgba(253,248,242,.15) 55%,rgba(253,248,242,.88) 100%)}
+.hero-inner{position:relative;max-width:1240px;margin:0 auto;padding:26px 20px 10px;text-align:center}
+.hero-script{font-family:'Great Vibes',cursive;font-size:clamp(44px,7vw,78px);color:#8a6f4b;text-shadow:0 2px 0 rgba(255,255,255,.7);line-height:1;margin-top:6px}
+.hero-sub{letter-spacing:.34em;font-size:11px;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+.envelope-wrap{position:relative;display:flex;justify-content:center;margin:14px auto 0;max-width:640px}
+.envelope{position:relative;width:min(430px,80vw);aspect-ratio:1.45/1;background:linear-gradient(160deg,#c4ab84,#a68a64 60%,#93744f);border-radius:6px;box-shadow:0 30px 50px -18px rgba(77,60,35,.55), inset 0 1px 0 rgba(255,255,255,.5);cursor:pointer;transition:transform .4s}
+.envelope:hover{transform:translateY(-4px)}
+.envelope:before{content:"";position:absolute;inset:0;background:linear-gradient(155deg,transparent 49.4%,rgba(0,0,0,.12) 50%,transparent 51%),linear-gradient(25deg,#b89d76 0 48%,transparent 48%);border-radius:6px}
+.env-flap{position:absolute;left:0;right:0;top:0;height:56%;background:linear-gradient(#b8a07c,#a68a64);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .8s ease;box-shadow:0 4px 10px rgba(0,0,0,.18);z-index:2}
+.envelope.open .env-flap{transform:rotateX(178deg)}
+.env-text{position:absolute;top:16%;left:0;right:0;text-align:center;font-family:'Great Vibes',cursive;font-size:30px;color:#fdf6ea;text-shadow:0 1px 2px rgba(0,0,0,.25);z-index:1}
+.seal{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e8cf9e,#c09a5e 45%,#8a6a3e 80%);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:24px;color:#5c4426;border:3px solid #d9bd8a;box-shadow:0 6px 14px rgba(0,0,0,.35), inset 0 2px 4px rgba(255,255,255,.6);z-index:3}
+.mini-bouquet{position:absolute;font-size:44px;filter:sepia(.3) saturate(.9);z-index:4}
+.mb-left{left:-58px;top:-30px;transform:rotate(-12deg)}
+.mb-right{right:-62px;bottom:-16px}
+.click-open{margin:18px 0 0;letter-spacing:.3em;font-size:11px;text-transform:uppercase;color:var(--ink-soft)}
+.click-open .down{display:block;font-size:20px;color:var(--gold-dark);animation:bob 1.6s infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(7px)}}
+/* side decor images */
+.side-flower{position:absolute;bottom:0;width:210px;pointer-events:none;z-index:5}
+.side-flower.left{left:0}.side-flower.right{right:0}
+.side-flower img{width:100%;height:280px;object-fit:cover;object-position:center;mask-image:linear-gradient(to top,#000 60%,transparent);-webkit-mask-image:linear-gradient(to top,#000 60%,transparent);opacity:.95;border-radius:0 60px 0 0}
+.side-flower.right img{border-radius:60px 0 0 0}
+/* ===== FEATURE STRIP ===== */
+.strip{background:var(--beige);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip-inner{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);padding:20px}
+.feat{display:flex;gap:14px;align-items:flex-start;padding:6px 22px;border-right:1px solid #d8c8ae}
+.feat:last-child{border-right:none}
+.feat .ic{width:44px;height:44px;min-width:44px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;color:var(--gold-dark);background:rgba(255,255,255,.5)}
+.feat b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+.feat span{font-size:12.5px;color:var(--ink-soft);line-height:1.45}
+/* ===== COUNTDOWN SECTION ===== */
+.count-sec{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:1.05fr .1fr 1fr;align-items:center;padding:44px 20px 30px;position:relative}
+.count-left{text-align:center;padding-right:10px}
+.eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase}
+.eyebrow i{display:block;font-family:'Great Vibes',cursive;font-size:20px;letter-spacing:0;text-transform:none;color:var(--gold);margin-top:2px}
+.timer{display:flex;justify-content:center;gap:18px;margin-top:16px}
+.timer div{text-align:center}
+.timer b{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,40px);font-weight:500;color:#8a6f4b}
+.timer span{display:block;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+.vline{width:1px;height:130px;background:var(--line);margin:0 auto}
+.count-right{text-align:center;position:relative}
+.couple{font-family:'Great Vibes',cursive;font-size:clamp(34px,4.5vw,48px);color:#8a6f4b}
+.couple-sub{font-size:13px;letter-spacing:.12em;color:var(--ink-soft);margin:6px 0 16px}
+.btn-gold{display:inline-block;background:linear-gradient(#b4986f,#9a7f57);color:#fff;text-decoration:none;font-size:12px;letter-spacing:.22em;text-transform:uppercase;padding:13px 30px;border-radius:3px;box-shadow:0 12px 24px -10px rgba(138,111,75,.6);border:1px solid #8a6f4b;cursor:pointer}
+.btn-gold:hover{filter:brightness(1.06)}
+.count-flowers{position:absolute;right:-10px;top:-30px;width:230px;pointer-events:none}
+.count-flowers img{width:100%;height:230px;object-fit:cover;border-radius:0 0 0 120px;mask-image:linear-gradient(#000,transparent);-webkit-mask-image:linear-gradient(#000,transparent)}
+/* ===== 4 CATEGORY CARDS ===== */
+.cat4{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:10px 20px 8px}
+.cat-card{background:var(--card);border:1px solid var(--line);border-radius:4px;overflow:hidden;text-align:center;box-shadow:0 10px 26px -14px rgba(77,60,35,.35);transition:.3s;cursor:pointer}
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 24px 40px -18px rgba(77,60,35,.45)}
+.cat-card .ph{position:relative;height:210px;overflow:hidden;background:#eee}
+.cat-card .ph img{width:100%;height:100%;object-fit:cover;filter:sepia(.22) saturate(.92);transition:.6s}
+.cat-card:hover .ph img{transform:scale(1.07)}
+.cat-card .badge{position:absolute;left:50%;bottom:-24px;transform:translateX(-50%);width:48px;height:48px;border-radius:50%;background:#a68a64;border:3px solid #fff;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;box-shadow:0 8px 16px rgba(0,0,0,.25)}
+.cat-card .tx{padding:32px 18px 20px}
+.cat-card h3{font-size:14px;letter-spacing:.24em;text-transform:uppercase;font-family:'Jost',sans-serif;font-weight:500}
+.cat-card p{font-size:13px;color:var(--ink-soft);margin-top:8px;line-height:1.6;font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic}
+.cat-card .arr{margin-top:10px;color:var(--ink);font-size:20px}
+/* ===== GALLERY ===== */
+.gallery-head{max-width:1240px;margin:26px auto 0;padding:30px 20px 6px;text-align:center;border-top:1px solid var(--line)}
+.gallery-head h2{font-family:'Great Vibes',cursive;font-size:clamp(36px,5vw,54px);color:#8a6f4b;font-weight:400}
+.gallery-head p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink-soft)}
+.searchrow{max-width:640px;margin:16px auto 0;display:flex;gap:10px;padding:0 20px}
+.searchrow input{flex:1;border:1px solid var(--line);border-radius:999px;padding:12px 20px;font-family:'Jost',sans-serif;font-size:13px;letter-spacing:.06em;background:#fff;outline:none;color:var(--ink)}
+.searchrow input:focus{border-color:var(--gold)}
+.grid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:24px 20px 10px}
+.tpl{background:#fff;border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 12px 28px -16px rgba(77,60,35,.35);display:flex;flex-direction:column;opacity:0;transform:scale(.82) translateY(48px);transition:opacity .7s ease,transform .7s cubic-bezier(.22,1,.36,1),box-shadow .3s ease;will-change:opacity,transform}
+.tpl.in-view{opacity:1;transform:scale(1) translateY(0)}
+.tpl.in-view:hover{transform:scale(1.03) translateY(-6px);box-shadow:0 26px 44px -18px rgba(77,60,35,.5)}
+@media(prefers-reduced-motion:reduce){.tpl{opacity:1;transform:none;transition:none}}
+.tpl .im{position:relative;aspect-ratio:4/3;overflow:hidden;background:#f2e9d8}
+.tpl .im img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:.6s}
+.tpl:hover .im img{transform:scale(1.06)}
+.tpl .pill{position:absolute;top:10px;left:10px;background:rgba(166,138,100,.95);color:#fff;font-size:10px;letter-spacing:.2em;text-transform:uppercase;padding:6px 12px;border-radius:999px}
+.tpl .view{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(60,45,28,.0);transition:.3s;opacity:0}
+.tpl:hover .view{opacity:1;background:rgba(60,45,28,.32)}
+.tpl .view span{background:#fff;color:var(--ink);font-size:11px;letter-spacing:.2em;text-transform:uppercase;padding:10px 22px;border-radius:999px}
+.tpl .bd{padding:14px 16px 16px}
+.tpl h4{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;line-height:1.3;min-height:44px}
+.tpl .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.tpl .meta em{font-style:normal;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dark);background:#f3e9d6;padding:5px 11px;border-radius:999px}
+.tpl .choose{margin-top:12px;display:flex;gap:8px}
+.btn-outline{flex:1;text-align:center;border:1px solid var(--gold);color:var(--gold-dark);border-radius:4px;padding:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;cursor:pointer;background:#fff;transition:.25s}
+.btn-outline:hover{background:var(--gold);color:#fff}
+.btn-solid{flex:1;text-align:center;background:var(--gold);color:#fff;border-radius:4px;padding:10px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid var(--gold);cursor:pointer}
+.btn-solid:hover{filter:brightness(1.08)}
+.empty{grid-column:1/-1;text-align:center;padding:50px;color:var(--ink-soft);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px}
+/* ===== QUOTE FOOTER ===== */
+.quote{position:relative;margin-top:34px;background:var(--beige);border-top:1px solid var(--line);overflow:hidden;text-align:center;padding:44px 20px 30px}
+.quote blockquote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(16px,2.4vw,21px);max-width:620px;margin:0 auto;line-height:1.6;color:var(--ink)}
+.quote .heart{color:var(--gold);font-size:20px;margin-top:12px}
+.quote .fl{position:absolute;bottom:0;width:250px;height:150px;object-fit:cover;pointer-events:none}
+.quote .fl.l{left:0;border-radius:0 80px 0 0}.quote .fl.r{right:0;border-radius:80px 0 0 0}
+footer{background:#f6eee1;border-top:1px solid var(--line);padding:22px 20px;text-align:center}
+footer .f-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:.2em}
+footer p{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:6px}
+footer .contact{margin-top:10px;font-size:13px;color:var(--ink)}
+footer .contact a{color:var(--gold-dark);text-decoration:none;font-weight:500}
+/* ===== MODAL ===== */
+.modal{position:fixed;inset:0;background:rgba(40,30,18,.65);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:18px}
+.modal.show{display:flex}
+.modal-box{background:#fffdf9;border-radius:10px;max-width:920px;width:100%;max-height:92vh;overflow:auto;border:1px solid var(--line)}
+.modal-top{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fffdf9;z-index:2}
+.modal-top h3{font-size:22px}
+.modal-top button{border:none;background:none;font-size:26px;cursor:pointer;color:var(--ink-soft)}
+.modal-body{display:grid;grid-template-columns:1.1fr 1fr;gap:22px;padding:22px}
+.modal-body img{width:100%;border-radius:8px;border:1px solid var(--line);background:#f4ecdd}
+.modal-body p{font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--ink-soft);line-height:1.6}
+.modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.whats{background:#1fa855;color:#fff;border:none;border-radius:6px;padding:14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif}
+.whats:hover{filter:brightness(1.07)}
+@media(max-width:1020px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+  .cat4{grid-template-columns:repeat(2,1fr)}
+  .side-flower{width:130px}.side-flower img{height:180px}
+  .ribbon{right:12px}
+  .nav{gap:16px}.nav a{font-size:10px}
+}
+@media(max-width:720px){
+  .nav a{display:none}.hamb{display:block}
+  .nav{justify-content:center}
+  .strip-inner{grid-template-columns:1fr 1fr;gap:14px}
+  .feat{border:none;padding:4px 6px}
+  .count-sec{grid-template-columns:1fr;gap:18px}.vline{display:none}
+  .grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .cat4{grid-template-columns:1fr 1fr;gap:12px}
+  .cat-card .ph{height:150px}
+  .modal-body{grid-template-columns:1fr}
+  .side-flower{display:none}
+  .count-flowers{display:none}
+}
+@media(max-width:460px){.grid{grid-template-columns:1fr}.cat4{grid-template-columns:1fr}}
+.mobile-menu{display:none;position:absolute;top:100%;left:0;right:0;background:#fffdf9;border-bottom:1px solid var(--line);padding:14px 20px;z-index:70}
+.mobile-menu.show{display:block}
+.mobile-menu a{display:block;padding:10px 0;text-decoration:none;color:var(--ink);font-size:12px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid #f0e5d2}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (mirrors reference design) -->
+<div class="topbar">
+  <div class="ribbon"><b>RSVP<br>FORM</b><span style="font-size:10px">INCLUDED</span><div class="heart">♥</div></div>
+  <nav class="nav">
+    <button class="hamb" onclick="document.getElementById('mmenu').classList.toggle('show')">☰</button>
+    <a href="#gallery" data-nav="wedding">Our Story</a>
+    <a href="#gallery" data-nav="corporate">Details</a>
+    <a href="#gallery" data-nav="general">RSVP</a>
+    <div class="logo"><div class="mono">G<span>|</span>C</div><div class="leaf">❧</div><small>GoldenCreation</small></div>
+    <a href="#gallery" data-nav="sendoff">Schedule</a>
+    <a href="#gallery" data-nav="anniversary">Gallery</a>
+    <a href="#contact">FAQs</a>
+  </nav>
+  <div class="mobile-menu" id="mmenu">
+    <a href="#gallery">Wedding Templates</a><a href="#gallery">Corporate</a><a href="#gallery">General</a><a href="#gallery">Sendoff</a><a href="#gallery">Anniversary</a>
+  </div>
+</div>
+
+<!-- STICKY TEMPLATE-TYPE BAR (attached on top as requested) -->
+<div class="filterbar" id="filterbar">
+  <div class="filterbar-inner" id="filters">
+    <button class="fbtn active" data-cat="all">All Templates <small id="c-all"></small></button>
+    <button class="fbtn" data-cat="wedding">Wedding <small id="c-wedding"></small></button>
+    <button class="fbtn" data-cat="corporate">Corporate <small id="c-corporate"></small></button>
+    <button class="fbtn" data-cat="general">General <small id="c-general"></small></button>
+    <button class="fbtn" data-cat="sendoff">Sendoff <small id="c-sendoff"></small></button>
+    <button class="fbtn" data-cat="anniversary">Anniversary <small id="c-anniversary"></small></button>
+  </div>
+</div>
+
+<!-- HERO (uses provided top image) -->
+<header class="hero">
+  <div class="hero-bg">
+    <img src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="GoldenCreation luxury floral invitation" onerror="this.style.display='none'">
+  </div>
+  <div class="hero-veil"></div>
+  <div class="side-flower left"><img src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="" onerror="this.remove()"></div>
+  <div class="side-flower right"><img src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="" onerror="this.remove()"></div>
+  <div class="hero-inner">
+    <div class="hero-script">You Are Invited!</div>
+    <div class="hero-sub">GoldenCreation &nbsp;•&nbsp; Card Template Portfolio</div>
+    <div class="envelope-wrap">
+      <span class="mini-bouquet mb-left">💐</span>
+      <div class="envelope" id="envelope" title="Click to open">
+        <div class="env-text">From the<br>GoldenCreation</div>
+        <div class="env-flap"></div>
+        <div class="seal">G</div>
+      </div>
+      <span class="mini-bouquet mb-right">💐</span>
+    </div>
+    <div class="click-open">Click to open...<span class="down">↓</span></div>
+  </div>
+</header>
+
+<!-- FEATURE STRIP (exact copy) -->
+<section class="strip">
+  <div class="strip-inner">
+    <div class="feat"><div class="ic">✎</div><div><b>Easy to Edit</b><span>Customize text, colors &amp; photos</span></div></div>
+    <div class="feat"><div class="ic">▣</div><div><b>Mobile + Desktop</b><span>Looks stunning on any device</span></div></div>
+    <div class="feat"><div class="ic">♥</div><div><b>RSVP Form Included</b><span>Collect responses with ease</span></div></div>
+    <div class="feat"><div class="ic">⬇</div><div><b>Instant Download</b><span>Edit, download &amp; publish right away</span></div></div>
+  </div>
+</section>
+
+<!-- COUNTDOWN + BRAND (mirrors reference) -->
+<section class="count-sec">
+  <div class="count-left">
+    <div class="eyebrow">The GoldenCreation Countdown <i>~ new drop ~</i></div>
+    <div class="timer">
+      <div><b id="d">321</b><span>Days</span></div><div><b>:</b></div>
+      <div><b id="h">20</b><span>Hours</span></div><div><b>:</b></div>
+      <div><b id="m">44</b><span>Minutes</span></div><div><b>:</b></div>
+      <div><b id="s">44</b><span>Seconds</span></div>
+    </div>
+  </div>
+  <div class="vline"></div>
+  <div class="count-right">
+    <div class="count-flowers"><img src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="" onerror="this.remove()"></div>
+    <div class="couple">GoldenCreation</div>
+    <div class="couple-sub">500+ Premium Cards &nbsp;•&nbsp; Wedding • Corporate • Sendoff • Anniversary</div>
+    <a class="btn-gold" href="#gallery">Choose Template →</a>
+  </div>
+</section>
+
+<!-- 4 CATEGORY CARDS (mirrors reference) -->
+<section class="cat4">
+  <div class="cat-card" data-goto="wedding">
+    <div class="ph"><img src="https://goldtapinnovation.com/storage/templates/wedding/tskBbED53Xyx51L0C22EJ6oXoolMEpfC1rNaUkHS.png" alt="Wedding"><div class="badge">📖</div></div>
+    <div class="tx"><h3>Wedding</h3><p>Elegant wedding invitations, timeless &amp; romantic.</p><div class="arr">→</div></div>
+  </div>
+  <div class="cat-card" data-goto="corporate">
+    <div class="ph"><img src="https://goldtapinnovation.com/storage/templates/corporate/B8YpQFcT0MjCFohbY4O5xRuyYELM20rCKiPHVhC8.jpg" alt="Corporate"><div class="badge">◈</div></div>
+    <div class="tx"><h3>Corporate</h3><p>All the important business events in one place.</p><div class="arr">→</div></div>
+  </div>
+  <div class="cat-card" data-goto="sendoff">
+    <div class="ph"><img src="https://goldtapinnovation.com/storage/templates/wedding/Mrw05eKJBmCQZTK7Bs9Phq0jCU8mcZrBWVErtfz4.png" alt="Sendoff"><div class="badge">◍</div></div>
+    <div class="tx"><h3>Sendoff</h3><p>Beautiful sendoff &amp; kitchen-party celebrations.</p><div class="arr">→</div></div>
+  </div>
+  <div class="cat-card" data-goto="anniversary">
+    <div class="ph"><img src="https://goldtapinnovation.com/storage/templates/anniversary/pJmHTa3KEd7ivHYcT68FuxEw68847UfEmXcIquzT.png" alt="Anniversary"><div class="badge">🎁</div></div>
+    <div class="tx"><h3>Anniversary</h3><p>Your presence is the greatest gift.</p><div class="arr">→</div></div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-head" id="gallery">
+  <h2>Template Portfolio</h2>
+  <p>Dear client — browse, tap a design, then press “Choose This Template” to order via WhatsApp.</p>
+  <div class="searchrow"><input id="search" type="search" placeholder="Search templates… e.g. wedding, sendoff, jubilee"></div>
+</section>
+<main class="grid" id="grid"></main>
+
+<!-- QUOTE -->
+<section class="quote">
+  <img class="fl l" src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="" onerror="this.remove()">
+  <img class="fl r" src="https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg" alt="" onerror="this.remove()">
+  <blockquote>“We can't wait to celebrate our special day with the people who mean the most to us.”</blockquote>
+  <div class="heart">♥</div>
+  <p style="margin-top:10px;font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#7a6c5d">— GoldenCreation —</p>
+</section>
+
+<footer id="contact">
+  <div class="f-logo">G | C</div>
+  <p>GoldenCreation • Card Template Portfolio</p>
+  <div class="contact">Order via WhatsApp: <a href="https://wa.me/255765800227?text=Hello%20GoldenCreation!%20I%20want%20to%20choose%20a%20card%20template." target="_blank">+255 765 800 227</a> &nbsp;•&nbsp; <a href="mailto:info@goldtapinnovation.com">info@goldtapinnovation.com</a></div>
+  <p style="margin-top:8px">© <span id="yr"></span> GoldenCreation. All rights reserved.</p>
+</footer>
+
+<!-- PREVIEW MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <div class="modal-top"><h3 id="mTitle" class="serif"></h3><button onclick="closeModal()">×</button></div>
+    <div class="modal-body">
+      <div><img id="mImg" src="" alt=""></div>
+      <div>
+        <p id="mDesc"></p>
+        <p id="mCat" style="margin-top:10px;font-style:normal;font-family:Jost;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#8a6f4b"></p>
+        <div class="modal-actions">
+          <button class="whats" id="mChoose">Choose This Template ♥</button>
+          <a class="btn-outline" id="mFull" href="#" target="_blank" style="text-decoration:none;text-align:center">Preview Full Size</a>
+          <button class="btn-outline" onclick="closeModal()">Back to Portfolio</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ---- Real template images from https://goldtapinnovation.com/templates ----
+const TEMPLATES = [
+ // WEDDING
+ {name:"Wedding — Jelson & Leah (Gold Seal)",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/tskBbED53Xyx51L0C22EJ6oXoolMEpfC1rNaUkHS.png"},
+ {name:"Wedding — Marco & Tatu",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/uQCxKzFu4wvMFTqIAmVaeShxgJVB7ZtaLCvI6EKz.png"},
+ {name:"Wedding — Donald & Irene",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/WwoWpartWhovpGu0s6H3Qn6mfnrq2sN2NZv1SWAA.png"},
+ {name:"Wedding — Emmanuel & Magreth",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/Pmc8awaKwv0HRNKFtJwQmM9zOjwHNicCoG6pn9P9.png"},
+ {name:"Wedding — Innocent & Clemensia",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/VL3eIPVj9OU7DtmKZ5YdU6pFO0G3zz3vZ2vGTMMR.png"},
+ {name:"Wedding — Romani & Rose",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/xjcqJgYIS4QlNSKKEgSXUwV2pCELG2LgW1CnhnGC.png"},
+ {name:"Wedding — Dr. Gregory & Dr. Winnie",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/L20yRs2AhldIeHRWMMu3SveOVhYw3mz4XmReyNDC.png"},
+ {name:"Wedding — Richard & Catherine",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/a6lf5zZSkxfhSp7OyGPpEnuitBd423IKbYElt6P6.png"},
+ {name:"Wedding — Davis & Annamary",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/8h0LqBFdezdlcDOlLBCN62qhUGZpDHs3lY6s113t.png"},
+ {name:"Wedding — Hosea & Christina",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/ptE5QDaMDZDSauRqVi707abxOrQBue9fGqwXxfHd.png"},
+ {name:"Wedding — Brian & Grace",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/oLptkdRmKAELRokRxqy0tYosqcmzYM8vVpH5NgUJ.png"},
+ {name:"Wedding — Paul & Catherine",cat:"wedding",img:"https://goldtapinnovation.com/storage/templates/wedding/SIhu8x6asjLnziI2afhoSbV0Ne3Ctotd9F9H4PKJ.png"},
+ // CORPORATE
+ {name:"Corporate — Juliana Sendoff (Beige)",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/B8YpQFcT0MjCFohbY4O5xRuyYELM20rCKiPHVhC8.jpg"},
+ {name:"Corporate — Juliana Mwalukasa Sendoff",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/GCGHsKztJdziiF8eAiANWby8EFjcI2qrTWEchdSV.png"},
+ {name:"Corporate — Marry Doreen Sendoff",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/15dNFbaudqCEA2akSrRRkG0gM5tCCJT7jNjfgx5m.png"},
+ {name:"Corporate — Aneth Lukyaa Sendoff",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/lXU9zebHKtL2elWDHfDa1zqPUOQgWz9NrFAZ1git.png"},
+ {name:"Corporate — Mercy Moshi Sendoff",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/nJTih09y11zYivUYmxtbHHSA1CnQKmEIuYBWRGkU.png"},
+ {name:"Corporate — Lucy Mwasamila Sendoff",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/MFiFgY9EHSDuY57jMPnOkZyoQRDSKQ9ZhkiLd9Lv.png"},
+ {name:"Corporate — Rehema Engagement",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/F1BJcw26JDztes1NkfHlAO26QDXKWDD4dPoAUg0c.png"},
+ {name:"Corporate — Kitchen Party Juliana",cat:"corporate",img:"https://goldtapinnovation.com/storage/templates/corporate/23506WRxEkYx1JUbeNQCboSU4F2SAvttuyHpz1Xf.png"},
+ // GENERAL
+ {name:"General — Nadhiri za Daima",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/bIjrKXAN55blheDcbMQDnGh7TBTZhs1gC2UxhWGf.png"},
+ {name:"General — Fundraising Shemasi Rogath",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/psez5OXV79dC1ffwKdnXQ6lPFP9zFdh0Cp2JeeVo.png"},
+ {name:"General — Edith Sendoff",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/FuUqhjdf4k92IX4byjfYtA6Cw8CLr0cWcTqcn4dR.png"},
+ {name:"General — Mahafali Ismail",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/H1Lv4WB6EJeNtQRi0MY6JyZb0uhi7XCapIG8nLAz.png"},
+ {name:"General — Komunio Ramsey & Jonel",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/sV8OdzW43SGYSyCvMU9xSnCIDbRszGdm1bi44t96.png"},
+ {name:"General — Mwaliko wa Kamati",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/onyUYl4HufL6hquiQN6JHPBXjIsaaNohcPH7Pquq.png"},
+ {name:"General — Ubatizo Gabriela",cat:"general",img:"https://goldtapinnovation.com/storage/templates/general/xjPl5VFtslsDM6uiBTcedmbTfXPELBZpbnglxYtU.png"},
+ // ANNIVERSARY
+ {name:"Anniversary — Dinner Gala Party",cat:"anniversary",img:"https://goldtapinnovation.com/storage/templates/anniversary/pJmHTa3KEd7ivHYcT68FuxEw68847UfEmXcIquzT.png"},
+ {name:"Anniversary — Jubilee Miaka 25 Upadre Joseph",cat:"anniversary",img:"https://goldtapinnovation.com/storage/templates/anniversary/wOQI2rQbxQCv7y4mDKLPk5h4hbAMawiYoa7I0jR0.png"},
+ {name:"Anniversary — Campaign Gold",cat:"anniversary",img:"https://goldtapinnovation.com/storage/templates/anniversary/ks2wJUKUJLsOlPamJ9p4es7RcOa95fK8Yujb3dQu.png"},
+ {name:"Anniversary — Shukrani Fr. Marcel",cat:"anniversary",img:"https://goldtapinnovation.com/storage/templates/anniversary/2cwwYhEhq0WdrPlPM2E8voXprERFD0IjGRM7lj0N.jpg"},
+ // SENDOFF (dedicated virtual category — images also sourced from goldtapinnovation)
+ {name:"Sendoff — Irene Aron",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/wedding/Mrw05eKJBmCQZTK7Bs9Phq0jCU8mcZrBWVErtfz4.png"},
+ {name:"Sendoff — Juliana Muumuliza",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/B8YpQFcT0MjCFohbY4O5xRuyYELM20rCKiPHVhC8.jpg"},
+ {name:"Sendoff — Aneth Lukyaa",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/lXU9zebHKtL2elWDHfDa1zqPUOQgWz9NrFAZ1git.png"},
+ {name:"Sendoff — Mercy Moshi",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/nJTih09y11zYivUYmxtbHHSA1CnQKmEIuYBWRGkU.png"},
+ {name:"Sendoff — Lucy Mwasamila",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/MFiFgY9EHSDuY57jMPnOkZyoQRDSKQ9ZhkiLd9Lv.png"},
+ {name:"Sendoff — Editha Chakachaka",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/general/FuUqhjdf4k92IX4byjfYtA6Cw8CLr0cWcTqcn4dR.png"},
+ {name:"Sendoff — Marry Doreen",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/15dNFbaudqCEA2akSrRRkG0gM5tCCJT7jNjfgx5m.png"},
+ {name:"Sendoff — Kitchen Party Juliana",cat:"sendoff",img:"https://goldtapinnovation.com/storage/templates/corporate/23506WRxEkYx1JUbeNQCboSU4F2SAvttuyHpz1Xf.png"}
+];
+let activeCat = "all";
+const grid = document.getElementById('grid');
+const search = document.getElementById('search');
+function counts(){
+  const c = {all:TEMPLATES.length,wedding:0,corporate:0,general:0,sendoff:0,anniversary:0};
+  TEMPLATES.forEach(t=>{ if(c[t.cat]!=null) c[t.cat]++ });
+  for(const k in c){ const el=document.getElementById('c-'+k); if(el) el.textContent="("+c[k]+")"; }
+}
+function card(t,i,idx=0){
+  const delay=((idx%4)*0.08).toFixed(2);
+  return `<article class="tpl" data-i="${i}" style="transition-delay:${delay}s">
+    <div class="im"><img loading="lazy" src="${t.img}" alt="${t.name}" onerror="this.src='https://i.pinimg.com/736x/82/d9/9d/82d99daaf4a9cc3932b95bb37b75c8a7.jpg'">
+      <div class="pill">${t.cat}</div><div class="view"><span>Preview ♥</span></div></div>
+    <div class="bd"><h4>${t.name}</h4>
+      <div class="meta"><em>${t.cat} template</em><span style="font-size:11px;color:#999">No. ${String(i+1).padStart(2,'0')}</span></div>
+      <div class="choose"><button class="btn-outline" onclick="openModal(${i})">Preview</button><button class="btn-solid" onclick="choose(${i})">Choose →</button></div>
+    </div></article>`;
+}
+function render(){
+  const q = (search.value||"").toLowerCase().trim();
+  const list = TEMPLATES.map((t,i)=>({...t,i})).filter(t=>
+    (activeCat==="all"||t.cat===activeCat) &&
+    (!q || t.name.toLowerCase().includes(q) || t.cat.includes(q))
+  );
+  grid.innerHTML = list.length ? list.map((t,idx)=>card(t,t.i,idx)).join("") : `<div class="empty">No templates found — try another word.</div>`;
+  grid.querySelectorAll('.tpl .im').forEach(el=>{
+    el.addEventListener('click',()=>openModal(+el.parentElement.dataset.i));
+  });
+  observeCards();
+}
+// Zoom-in on scroll for template cards
+let zoomObserver=null;
+function observeCards(){
+  const cards=grid.querySelectorAll('.tpl');
+  if(!('IntersectionObserver' in window)){cards.forEach(c=>c.classList.add('in-view'));return;}
+  if(zoomObserver) zoomObserver.disconnect();
+  zoomObserver=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('in-view');zoomObserver.unobserve(e.target);}
+    });
+  },{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  cards.forEach(c=>zoomObserver.observe(c));
+}
+document.querySelectorAll('.fbtn').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active'); activeCat=b.dataset.cat; render();
+  document.getElementById('gallery').scrollIntoView({behavior:'smooth'});
+}));
+document.querySelectorAll('[data-goto]').forEach(c=>c.addEventListener('click',()=>{
+  const cat=c.dataset.goto;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('active',x.dataset.cat===cat));
+  activeCat=cat; render();
+  document.getElementById('gallery').scrollIntoView({behavior:'smooth'});
+}));
+document.querySelectorAll('[data-nav]').forEach(a=>a.addEventListener('click',()=>{
+  const cat=a.dataset.nav;
+  document.querySelectorAll('.fbtn').forEach(x=>x.classList.toggle('active',x.dataset.cat===cat));
+  activeCat=cat; render();
+}));
+search.addEventListener('input',render);
+// modal
+let current=-1;
+function openModal(i){
+  current=i; const t=TEMPLATES[i];
+  document.getElementById('mTitle').textContent=t.name;
+  document.getElementById('mImg').src=t.img;
+  document.getElementById('mFull').href=t.img;
+  document.getElementById('mCat').textContent=t.cat+" template • GoldenCreation";
+  document.getElementById('mDesc').textContent="Dear client, this is a premium "+t.cat+" design from GoldenCreation. Press “Choose This Template” and we will personalize it with your names, photos, date and RSVP form.";
+  document.getElementById('modal').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');document.body.style.overflow='';}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+function choose(i){
+  const t=TEMPLATES[i];
+  const msg=encodeURIComponent("Hello GoldenCreation! I want to CHOOSE this template:\n• "+t.name+"\n• Category: "+t.cat+"\n• Image: "+t.img+"\nPlease personalize it for me.");
+  window.open("https://wa.me/255765800227?text="+msg,"_blank");
+}
+document.getElementById('mChoose').addEventListener('click',()=>{if(current>=0)choose(current);});
+// envelope
+document.getElementById('envelope').addEventListener('click',function(){
+  this.classList.toggle('open');
+  setTimeout(()=>document.getElementById('gallery').scrollIntoView({behavior:'smooth'}),600);
+});
+// countdown (to 12 June 2027 like reference)
+function tick(){
+  const target=new Date('2027-06-12T09:00:00');
+  let diff=Math.max(0,target-new Date());
+  const d=Math.floor(diff/864e5),h=Math.floor(diff/36e5)%24,m=Math.floor(diff/6e4)%60,s=Math.floor(diff/1e3)%60;
+  document.getElementById('d').textContent=String(d).padStart(3,'0');
+  document.getElementById('h').textContent=String(h).padStart(2,'0');
+  document.getElementById('m').textContent=String(m).padStart(2,'0');
+  document.getElementById('s').textContent=String(s).padStart(2,'0');
+}
+setInterval(tick,1000);tick();
+document.getElementById('yr').textContent=new Date().getFullYear();
+counts();render();
+</script>
+</body>
+</html>
