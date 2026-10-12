@@ -159,6 +159,25 @@ footer .contact a{color:var(--gold-dark);text-decoration:none;font-weight:500}
 .modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:18px}
 .whats{background:#1fa855;color:#fff;border:none;border-radius:6px;padding:14px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif}
 .whats:hover{filter:brightness(1.07)}
+/* ===== CHOOSE POPUP (tell agent template number) ===== */
+.note-overlay{position:fixed;inset:0;background:rgba(40,30,18,.65);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:200;padding:18px}
+.note-overlay.show{display:flex}
+.note-box{background:#fffdf9;border:1px solid var(--line);border-radius:12px;max-width:440px;width:100%;text-align:center;padding:34px 28px 28px;box-shadow:0 30px 60px -20px rgba(40,30,18,.5);animation:notePop .35s cubic-bezier(.22,1,.36,1)}
+@keyframes notePop{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.note-box .n-heart{width:56px;height:56px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(#b4986f,#9a7f57);color:#fff;display:flex;align-items:center;justify-content:center;font-size:24px;box-shadow:0 12px 24px -10px rgba(138,111,75,.6)}
+.note-box h3{font-family:'Great Vibes',cursive;font-size:34px;color:#8a6f4b;font-weight:400}
+.note-box .n-msg{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--ink-soft);line-height:1.6;margin-top:8px}
+.note-num{display:inline-block;margin-top:14px;background:#f3e9d6;border:1.5px dashed var(--gold);color:var(--gold-dark);border-radius:10px;padding:12px 26px;font-size:15px;letter-spacing:.14em;text-transform:uppercase}
+.note-num b{display:block;font-size:30px;letter-spacing:.1em}
+.note-name{margin-top:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft)}
+.note-actions{display:flex;gap:10px;margin-top:20px}
+.note-actions button{flex:1;border-radius:6px;padding:13px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;font-family:'Jost',sans-serif}
+.note-copy{background:var(--gold);color:#fff;border:1px solid var(--gold)}
+.note-copy:hover{filter:brightness(1.08)}
+.note-ok{background:#fff;color:var(--gold-dark);border:1px solid var(--gold)}
+.note-ok:hover{background:var(--gold);color:#fff}
+.note-tip{margin-top:12px;font-size:11px;letter-spacing:.1em;color:#9a8b78}
+@media(prefers-reduced-motion:reduce){.note-box{animation:none}}
 @media(max-width:1020px){
   .grid{grid-template-columns:repeat(3,1fr)}
   .cat4{grid-template-columns:repeat(2,1fr)}
@@ -334,6 +353,22 @@ footer .contact a{color:var(--gold-dark);text-decoration:none;font-weight:500}
   </div>
 </div>
 
+<!-- CHOOSE POPUP: tell the agent the template number -->
+<div class="note-overlay" id="noteOverlay">
+  <div class="note-box">
+    <div class="n-heart">♥</div>
+    <h3>Wonderful Choice!</h3>
+    <p class="n-msg">Dear client, please tell the agent your <b>template number</b> below so we can personalize it for you.</p>
+    <div class="note-num">Template Number<b id="noteNum">No. 01</b></div>
+    <div class="note-name" id="noteName"></div>
+    <div class="note-actions">
+      <button class="note-copy" onclick="copyTemplateNo()">Copy Number</button>
+      <button class="note-ok" onclick="closeNote()">Got It ✓</button>
+    </div>
+    <div class="note-tip" id="copyTip">Take a screenshot or copy the number before chatting with our agent.</div>
+  </div>
+</div>
+
 <script>
 // ---- Real template images from https://goldtapinnovation.com/templates ----
 const TEMPLATES = [
@@ -456,11 +491,29 @@ function openModal(i){
 }
 function closeModal(){document.getElementById('modal').classList.remove('show');document.body.style.overflow='';}
 document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeModal();closeNote();}});
 function choose(i){
   const t=TEMPLATES[i];
-  const msg=encodeURIComponent("Hello GoldenCreation! I want to CHOOSE this template:\n• "+t.name+"\n• Category: "+t.cat+"\n• Image: "+t.img+"\nPlease personalize it for me.");
-  window.open("https://wa.me/255765800227?text="+msg,"_blank");
+  const no="No. "+String(i+1).padStart(2,'0');
+  document.getElementById('noteNum').textContent=no;
+  document.getElementById('noteName').textContent=t.name+" • "+t.cat;
+  document.getElementById('copyTip').textContent="Take a screenshot or copy the number before chatting with our agent.";
+  document.getElementById('noteOverlay').classList.add('show');
+}
+function closeNote(){document.getElementById('noteOverlay').classList.remove('show');}
+document.getElementById('noteOverlay').addEventListener('click',e=>{if(e.target.id==='noteOverlay')closeNote();});
+function copyTemplateNo(){
+  const no=document.getElementById('noteNum').textContent;
+  const name=document.getElementById('noteName').textContent;
+  const text="Hello GoldenCreation! My template number is "+no+" ("+name+"). Please personalize it for me.";
+  const done=()=>{document.getElementById('copyTip').textContent="✓ Copied! Now send \""+no+"\" to our agent.";};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done).catch(()=>fallbackCopy(text,done));}
+  else fallbackCopy(text,done);
+}
+function fallbackCopy(text,cb){
+  const ta=document.createElement('textarea');ta.value=text;document.body.appendChild(ta);ta.select();
+  try{document.execCommand('copy');cb();}catch(e){}
+  document.body.removeChild(ta);
 }
 document.getElementById('mChoose').addEventListener('click',()=>{if(current>=0)choose(current);});
 // envelope
